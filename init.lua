@@ -34,6 +34,9 @@ wifiMenu = hs.menubar.newWithPriority(2147483645)
 ssidChanged()
 wifiWatcher = hs.wifi.watcher.new(ssidChanged):start()
 -------------------------------------------------------------------------------------------------------
+-----------------------------Because i'm awesome!------------------------------------------------------
+hs.menubar.newWithPriority(2147483645):setTitle("| ☞ Blake is Awesome! ☜ |")
+-------------------------------------------------------------------------------------------------------
 
 -- Displays a circle on the screen for pointing things out
 mouseCircle = nil
@@ -62,7 +65,13 @@ hs.hotkey.bind({"cmd","alt","shift"}, "D", mouseHighlight)
 
 --attempting to send a text messsage to myself
 hs.hotkey.bind({"cmd","alt","shift"}, "T", function()
-
+    print('1')
+    -- hs.messages.iMessage("+1-303-828-7512", 'now lets count to TWO HUNDRED AND FIFTY love blakebot')
+    for i = 1, 20 do
+        hs.messages.iMessage("+1-aaa-aaa-aaaa", 'AaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaA')
+    end
+    -- hs.messages.iMessage("+1-303-828-7512", 'sent from and with my texting bot :)')
+    print('sent')
 end)
 
 --These detect changes in the wifi?????????????
@@ -99,58 +108,63 @@ hs.hotkey.bind({"cmd","alt","shift"}, "M", function()
     updater(updateString)
 end)
 -- only install the frontend
-hs.hotkey.bind({"cmd","alt","shift"}, "P", function()
+hs.hotkey.bind({"cmd","alt","shift"}, "N", function()
     updateString = "sudo apt-get update && sudo apt-get install -y webscale-portal"
     print('updating, and installing portal')
     updater(updateString)
 end)
 -- only install the backend
-hs.hotkey.bind({"cmd","alt","shift"}, "L", function()
+hs.hotkey.bind({"cmd","alt","shift"}, "B", function()
     updateString = "sudo apt-get update && sudo apt-get install lgcommandprocessor"
     print('updating, and installing control')
     updater(updateString)
 end)
 
 -- a spoon process that recognizes when you hiss sssssssssss and then does stuff
-local popclick = require "hs.noises"
+local sss = hs.noises
 listener = nil
-popclickListening = false
+listening = false
 
-function noise1()
-    print('I can hear you sound 1')
+function hiss()
+    hs.alert.show('I can hear you sound 1')
+    print('ITS ALIVE')
 end
 
-function noise2()
-    print('I can hear you sound 2')
+function pop()
+    hs.alert.show('I can hear you sound 2')
+    print('ITS ALIVE')
 end
 
-function noise3()
-    print('I can hear you sound 3')
+function click()
+    hs.alert.show('I can hear you sound 3')
+    print('ITS ALIVE')
 end
 
 
-hs.hotkey.bind({"cmd","alt","shift"}, "B", function()
-    if not popclickListening then
+hs.hotkey.bind({"cmd","alt","shift"}, "L", function()
+    print(listener)
+    if not listening then
         listener:start()
         hs.alert.show("listening")
     else
         listener:stop()
         hs.alert.show("stopped listening")
     end
-    popclickListening = not popclickListening
+    listening = not listening
 end)
 
-function popclickInit()
-    popclickListening = false
-    listener = popclick.new(function(soundType)
+function hiss()
+    listening = false
+    listener = sss.new(function(soundType)
         if soundType == 1 then
-            noise1()
+            hiss()
         elseif soundType == 2 then
-            noise2()
+            pop()
         elseif soundType == 3 then
-            noise3()
+            click()
         end
     end)
+    print(listener)
 end
 
-popclickInit()
+hiss()
