@@ -41,7 +41,7 @@ menuBar = {
     { title = "-" },
     { title = "fill the screen", fn = function()
         for i = 0, 23 do
-            socket.sleep(2.0)
+            socket.sleep(2.)
             hs.alert.show('asdfasdfasdfasdfasdfasdfaasdfasdfasdfasdfasdfasdfaasdfasdfasdfasdfasdfasdfaasdfasdfasdfasdfasdfasdfaasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf')
         end
     end },
@@ -88,19 +88,14 @@ hs.hotkey.bind({"cmd","alt","shift"}, "C", function()
     for i = 0, 229 do
         local j = tostring(i)
         print(j)
-        -- hs.messages.iMessage("+1-720-402-2283", catFacts[j])
-        -- hs.messages.iMessage("+1-303-828-7512", catFacts[j])
     end
 end)
 
 --attempting to send a text messsage to myself
 hs.hotkey.bind({"cmd","alt","shift"}, "T", function()
-    -- hs.messages.iMessage("+1-303-828-7512", 'now lets count to TWO HUNDRED AND FIFTY love blakebot')
     for i = 1, 5 do
-        -- hs.messages.iMessage("+1-303-828-7512", "hi tanner i'm at work")
+        -- hs.messages.iMessage("+1-a", 'sent from and with my texting bot :)')
     end
-    -- hs.messages.iMessage("+1-303-828-7512", 'sent from and with my texting bot :)')
-
     print('sent')
 end)
 
