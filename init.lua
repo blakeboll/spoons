@@ -33,9 +33,25 @@ end
 wifiMenu = hs.menubar.newWithPriority(2147483645)
 ssidChanged()
 wifiWatcher = hs.wifi.watcher.new(ssidChanged):start()
--------------------------------------------------------------------------------------------------------
+------------------------Menu Bar Items-------------------------------------------------------------------------------
+local socket = require 'socket'
+
+menuBar = {
+    { title = "Text tanner cat facts", fn = function() hs.alert.show('working') end },
+    { title = "-" },
+    { title = "fill the screen", fn = function()
+        for i = 0, 23 do
+            socket.sleep(2.0)
+            hs.alert.show('asdfasdfasdfasdfasdfasdfaasdfasdfasdfasdfasdfasdfaasdfasdfasdfasdfasdfasdfaasdfasdfasdfasdfasdfasdfaasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdfasdf')
+        end
+    end },
+    { title = "-" },
+    -- { title = "other item", fn = some_function },
+    -- { title = "disabled item", disabled = true },
+    -- { title = "checked item", checked = true },
+}
 -----------------------------Because i'm awesome!------------------------------------------------------
-hs.menubar.newWithPriority(2147483645):setTitle("| ☞ Blake is Awesome! ☜ |")
+hs.menubar.newWithPriority(2147483645):setTitle("| ☞ Blake is Awesome! ☜ |"):setMenu(menuBar)
 -------------------------------------------------------------------------------------------------------
 
 -- Displays a circle on the screen for pointing things out
@@ -53,7 +69,7 @@ function mouseHighlight()
     mousepoint = hs.mouse.getAbsolutePosition()
     -- Prepare a big red circle around the mouse pointer
     mouseCircle = hs.drawing.circle(hs.geometry.rect(mousepoint.x-40, mousepoint.y-40, 80, 80))
-    mouseCircle:setStrokeColor({["red"]=0,["blue"]=1,["green"]=0,["alpha"]=1})
+    mouseCircle:setStrokeColor({["red"]=0,["blue"]=1,["green"]=0,["alpha"]=100})
     mouseCircle:setFill(false)
     mouseCircle:setStrokeWidth(5)
     mouseCircle:show()
@@ -63,14 +79,28 @@ function mouseHighlight()
 end
 hs.hotkey.bind({"cmd","alt","shift"}, "D", mouseHighlight)
 
+--parses json objects into lua tables
+local json = require "cjson"
+--takes catfacts json and texts it to someone
+hs.hotkey.bind({"cmd","alt","shift"}, "C", function()
+    local file = io.open("/Users/blakebollman/.hammerspoon/json/pigFacts.json")
+    local catFacts = json.decode(file:read("*a"))
+    for i = 0, 229 do
+        local j = tostring(i)
+        print(j)
+        -- hs.messages.iMessage("+1-720-402-2283", catFacts[j])
+        -- hs.messages.iMessage("+1-303-828-7512", catFacts[j])
+    end
+end)
+
 --attempting to send a text messsage to myself
 hs.hotkey.bind({"cmd","alt","shift"}, "T", function()
-    print('1')
     -- hs.messages.iMessage("+1-303-828-7512", 'now lets count to TWO HUNDRED AND FIFTY love blakebot')
-    for i = 1, 20 do
-        hs.messages.iMessage("+1-aaa-aaa-aaaa", 'AaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaAAaAAaAAaaaaAAAAaaaaA')
+    for i = 1, 5 do
+        -- hs.messages.iMessage("+1-303-828-7512", "hi tanner i'm at work")
     end
     -- hs.messages.iMessage("+1-303-828-7512", 'sent from and with my texting bot :)')
+
     print('sent')
 end)
 
@@ -103,7 +133,7 @@ function updater(updateString)
 end
 -- install both the frontend and backend
 hs.hotkey.bind({"cmd","alt","shift"}, "M", function()
-    updateString = "sudo apt-get update && sudo apt-get install -y webscale-portal && sudo apt-get install lgcommandprocessor"
+    updateString = "sudo apt-get update && sudo apt-get install -y webscale-portal && sudo apt-get install -y lgcommandprocessor"
     print('updating, and installing portal and control')
     updater(updateString)
 end)
